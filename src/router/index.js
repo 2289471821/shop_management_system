@@ -3,9 +3,6 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const Login = () => import('@/components/Login')
-const Home = () => import('@/components/Home')
-
 const routes = [
   {
     path: '/',
@@ -14,12 +11,60 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: () => import('@/components/Login')
   },
   {
     path: '/home',
     name: 'home',
-    component: Home
+    redirect: '/welcome',
+    component: () => import('@/components/Home'),
+    children: [
+      {
+        path: '/welcome',
+        name: 'welcome',
+        component: () => import('@/components/Welcome')
+      },
+      {
+        path: '/users',
+        name: 'users',
+        component: () => import('@/components/user/Users')
+      },
+      {
+        path: '/roles',
+        name: 'roles',
+        component: () => import('@/components/roles/Roles')
+      },
+      {
+        path: '/rights',
+        name: 'rights',
+        component: () => import('@/components/rights/Rights')
+      },
+      {
+        path: '/goods',
+        name: 'goods',
+        component: () => import('@/components/goods/Goods')
+      },
+      {
+        path: '/params',
+        name: 'params',
+        component: () => import('@/components/params/Params')
+      },
+      {
+        path: '/categories',
+        name: 'categories',
+        component: () => import('@/components/categories/Categories')
+      },
+      {
+        path: '/orders',
+        name: 'orders',
+        component: () => import('@/components/orders/Orders')
+      },
+      {
+        path: '/reports',
+        name: 'reports',
+        component: () => import('@/components/reports/Reports')
+      },
+    ]
   }
 ]
 
